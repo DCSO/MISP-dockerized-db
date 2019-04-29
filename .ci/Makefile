@@ -23,3 +23,6 @@ push:
 
 notify-hub-docker-com:
 	@bash 05_notify_hub.docker.com.sh $(TOKEN)
+
+pull:
+	@bash 02_pull.sh $(v)
