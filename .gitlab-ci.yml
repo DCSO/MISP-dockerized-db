@@ -52,7 +52,7 @@ before_script:
   - make -C .ci notify-hub-docker-com URL=$DOCKER_HUB_NOTIFY_URL
 
 
-build-10.4.4-bionic:
+pull-10.4.4-bionic:
     extends: .pull
     variables: 
       VERSION: "library/mariadb:10.4.4-bionic"
