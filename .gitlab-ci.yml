@@ -29,7 +29,6 @@ before_script:
   only: 
   - master
   - schedules
-  - feat/MDD-169
   script:
   - make -C .ci build v=$VERSION 
   - make -C .ci tags REPOURL=$CUSTOM_REGISTRY_URL
@@ -38,7 +37,22 @@ before_script:
   - make -C .ci push REPOURL=$DOCKER_SLUG USER=$DOCKER_USERNAME PW=$DOCKER_PASSWORD
   - make -C .ci notify-hub-docker-com URL=$DOCKER_HUB_NOTIFY_URL
 
+.pull:
+  stage: build
+  only: 
+  - master
+  - schedules
+  - feat/MDD-169
+  script:
+  - make -C .ci pull v=$VERSION 
+  - make -C .ci tags REPOURL=$CUSTOM_REGISTRY_URL
+  - make -C .ci tags REPOURL=$DOCKER_SLUG
+  - make -C .ci push REPOURL=$CUSTOM_REGISTRY_URL USER=$CUSTOM_REGISTRY_USER PW=$CUSTOM_REGISTRY_PW
+  - make -C .ci push REPOURL=$DOCKER_SLUG USER=$DOCKER_USERNAME PW=$DOCKER_PASSWORD
+  - make -C .ci notify-hub-docker-com URL=$DOCKER_HUB_NOTIFY_URL
+
+
 build-10.4.4-bionic:
-    extends: .build
+    extends: .pull
     variables: 
-      VERSION: "10.4.4-bionic"
+      VERSION: "library/mariadb:10.4.4-bionic"
