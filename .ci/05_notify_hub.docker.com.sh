@@ -1,5 +1,6 @@
 #!/bin/bash
-set -e
+set -exv
+
 STARTMSG="[notify_hob.docker.com]"
 
 NOTIFY_URL="$1"
