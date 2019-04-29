@@ -12,7 +12,6 @@ help:
 		make push $(REPOURL) $(USER) $(PW) \n \
 		make notify-hub.docker.com TOKEN=<TOKEN> \n \
 	"
-
 build:
 	@bash 02_build.sh $(v) $(prod)
 
