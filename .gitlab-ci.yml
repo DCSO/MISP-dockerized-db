@@ -83,6 +83,8 @@ variables:
       EOF
     - echo "${CA}" >> /kaniko/ssl/certs/ca-certificates.crt
     #- printenv
+    - ls -la "$CI_PROJECT_DIR"
+    - ls -la "$CI_PROJECT_DIR/$FOLDER"
     - ls -la "$CI_PROJECT_DIR/$FOLDER/Dockerfile"
     - echo "$DOCKER_SLUG/$CI_PROJECT_PATH_SLUG:$TAG"
     - /kaniko/executor --verbosity info
