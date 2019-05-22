@@ -82,8 +82,8 @@ variables:
       }
       EOF
     - echo "${CA}" >> /kaniko/ssl/certs/ca-certificates.crt
+    - printenv
     - echo "$CI_PROJECT_DIR/$FOLDER/Dockerfile"
-    - echo "$CUSTOM_REGISTRY_URL/$CI_PROJECT_PATH_SLUG:$TAG"
     - echo "$DOCKER_SLUG/$CI_PROJECT_PATH_SLUG:$TAG"
     - /kaniko/executor --verbosity info
                       --reproducible
@@ -94,7 +94,7 @@ variables:
                       --destination "$DOCKER_SLUG/$CI_PROJECT_PATH_SLUG:$TAG"
                       --cache=true
                       --cache-repo="$CI_REGISTRY_IMAGE/cache"
-                      #--build-arg "$BUILD_ARGS"
+                      --build-arg "$BUILD_ARGS"
     - make -C .ci notify-hub-docker-com URL=$DOCKER_HUB_NOTIFY_URL
 
 
@@ -104,4 +104,4 @@ build-10.4.4-bionic:
     FOLDER: 10.4.4-bionic
     #TAG: $CI_COMMIT_SHA-$CI_PIPELINE_ID
     TAG: $FOLDER
-    BUILD_ARGS: ""
+    BUILD_ARGS: VERSION=$FOLDER
