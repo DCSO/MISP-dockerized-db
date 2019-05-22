@@ -87,8 +87,8 @@ variables:
                       --digest-file /dev/termination-log 
                       --context "$CI_PROJECT_DIR/$FOLDER"
                       --dockerfile "$CI_PROJECT_DIR/$FOLDER/Dockerfile"
-                      --destination ""$CUSTOM_REGISTRY_URL/$CI_PROJECT_PATH_SLUG:$TAG"
-                      --destination ""$DOCKER_SLUG/$CI_PROJECT_PATH_SLUG:$TAG"
+                      --destination "$CUSTOM_REGISTRY_URL/$CI_PROJECT_PATH_SLUG:$TAG"
+                      --destination "$DOCKER_SLUG/$CI_PROJECT_PATH_SLUG:$TAG"
                       --cache=true
                       --cache-repo="$CI_REGISTRY_IMAGE/cache"
                       #--build-arg "$BUILD_ARGS"
