@@ -1,7 +1,4 @@
-image: docker:latest
-
-services:
-  - docker:dind
+---
 
 stages:
 #- test
@@ -17,42 +14,91 @@ variables:
   # CUSTOM_REGISTRY_USER
   # CUSTOM_REGISTRY_PW
   # CUSTOM_REGISTRIES
-  VERSION: "PLACEHOLDER"
-
-
-before_script:
-- .ci/01_before_install.sh
-
+  # via https://pki.dcso.de/ca/PEM/DCSOCAROOTC2G1.pem
+  CA: |+
+    -----BEGIN CERTIFICATE-----
+    MIIF5TCCA82gAwIBAgIIbqfDQh0Xc6YwDQYJKoZIhvcNAQELBQAwHDEaMBgGA1UE
+    AwwRRENTTy1DQS1ST09ULUMyRzEwHhcNMTYwNjAxMTYxNDM0WhcNMzYwNTI3MTYx
+    NDM0WjAcMRowGAYDVQQDDBFEQ1NPLUNBLVJPT1QtQzJHMTCCAiIwDQYJKoZIhvcN
+    AQEBBQADggIPADCCAgoCggIBAK5oEoRg6XN5p+5olbM5gwxluXkECzIMzNhJkrmo
+    /1Wd9hCr7sx+N3DLOQcQQWt5pnAHHstH4/AZT33Ceut9Gers+V5W3TcKvEjm106N
+    fKK680vJ9bR9I1Xgcm177Dto6srMIPtKPfQAzPUfjjOMhZm7tSFjfjyShNDAW1UO
+    RoXLwAtZg4rQLYnoIKU71ckbX28ovJt5o1P3zrgrKjerWcvf8C3KqHU/HNgqxsIC
+    2xwH+xblyI3SNrhqGuaF04puhJWDEW/ei7Ihe6xwu0jtYRwkjnCd8knlgyzcfUHc
+    QmEcjzYUYLF4fI9IZMg3f+prRCGSLfVScH5lKihuDD8uqfbT/UYJMqFfgjdfTscB
+    NKxFlCXN6yAaqsjZEhqQG/gx5bdC6bCwBzBF2L1d4Gg40c2RtHEd+BIBF+fBfGAW
+    fPDozF23N6+e/1NsPah4epmWXGSkyIckMwJ0IRsQfWL9vtgRpG2YFOD08WoklpHl
+    PibKhCURKslU0cX5g8AfOqYqPV6aoyC3leULWeFgpHhKULzer0EI9ZQbeejtOVaF
+    QBY7XNdoWTpnBLQ/Fya1eDy+CDAMvydsbEzcUTZffAWFGviFSzrpfHtwxfBIlaPp
+    WhkZxnPacnpLdC04BYBa7lcNduq3ZfuAXj6PAe14PyTUAXjfrDHAVs0INEuT+GP9
+    +/wfAgMBAAGjggEpMIIBJTAdBgNVHQ4EFgQU3bH6cDhmSfoABnX6BixlmlkuU7Uw
+    DwYDVR0TAQH/BAUwAwEB/zAfBgNVHSMEGDAWgBTdsfpwOGZJ+gAGdfoGLGWaWS5T
+    tTCBwQYDVR0fBIG5MIG2MIGCoF6gXIZabGRhcDovL3BraS5kY3NvLmRlL0NOPURD
+    U08tQ0EtUk9PVC1DMkcxLE9VPXBraSxEQz1kY3NvLERDPWxvbGNhdD9jZXJ0aWZp
+    Y2F0ZVJldm9jYXRpb25MaXN0oiCkHjAcMRowGAYDVQQDDBFEQ1NPLUNBLVJPT1Qt
+    QzJHMTAvoC2gK4YpaHR0cDovL3BraS5kY3NvLmRlL2NybC9EQ1NPQ0FST09UQzJH
+    MS5jcmwwDgYDVR0PAQH/BAQDAgGGMA0GCSqGSIb3DQEBCwUAA4ICAQB+/0Rz3taZ
+    SVqIYOfttFOW557i5er3bTNM50TorF01ab2Lscr3LarH4Odp+W4XKA2ViM+HRMzn
+    /NI+HabBqMWX+JOgTVY6z55fuiFIehpE2LXkivY5kG4hlu/A3fYsyHxbGl/9ARLS
+    cXCuNMo/ctP5/NddJRIr8QAHcPWGpTk9SzOFrIxcdxqed+K6RMGgmhxL6/GRp+Uf
+    6W+IPGiswDQLvy9Ll+A8dMgxFB9HuJ8wTrBhMeXTvmUuwp6ZIz/IFmFKMacAI0iP
+    Ib2KOmArYz4olwBQ5FnS6W1efb5C4clX719h7P3X2cZr5CLIiXx8sLtiePLcAJZb
+    XXKP16bEbwcvYxNAAj49dX05DORLh0VVW0Q1PQ06cCrWgl6yw+w3wnR/3ov8st5k
+    pHGjrxdXtlhrUq+n7or8s0cBIiGXacxRvAc8xwd/bJxIqF678e5hoTp3q6pSzuYw
+    JIst7Nam4yxvxSqEDSrkO6HfwGWhGCwbnXMygJMNo+aDYV3oMWJ/D7wQtSitfyID
+    QepyeAnmRyMi5iFsKon9LGkMhVejJK4+FehcGRJkVxlFqpJQi4EtU/8BfjVnZ8Za
+    QCWm3CsuBpeJKH3i4WZUYCyEPYhvOYuksLE0SKiYXc7ItG3hEtQFGrwr9JyhICm8
+    YAotqVEyeCnPdiTKgG7JsUVPLgUWqSORhw==
+    -----END CERTIFICATE-----
 
 .build:
   stage: build
-  only: 
-  - master
-  - schedules
-  script:
-  - make -C .ci build v=$VERSION 
-  - make -C .ci tags REPOURL=$CUSTOM_REGISTRY_URL
-  - make -C .ci tags REPOURL=$DOCKER_SLUG
-  - make -C .ci push REPOURL=$CUSTOM_REGISTRY_URL USER=$CUSTOM_REGISTRY_USER PW=$CUSTOM_REGISTRY_PW
-  - make -C .ci push REPOURL=$DOCKER_SLUG USER=$DOCKER_USERNAME PW=$DOCKER_PASSWORD
-  - make -C .ci notify-hub-docker-com URL=$DOCKER_HUB_NOTIFY_URL
-
-.pull:
-  stage: build
-  only: 
+  only:
   - master
   - schedules
   - feat/MDD-169
+  image:
+    # :debug for gitlab-ci sh in image
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
   script:
-  - make -C .ci pull v=$VERSION 
-  - make -C .ci tags REPOURL=$CUSTOM_REGISTRY_URL
-  - make -C .ci tags REPOURL=$DOCKER_SLUG
-  - make -C .ci push REPOURL=$CUSTOM_REGISTRY_URL USER=$CUSTOM_REGISTRY_USER PW=$CUSTOM_REGISTRY_PW
-  - make -C .ci push REPOURL=$DOCKER_SLUG USER=$DOCKER_USERNAME PW=$DOCKER_PASSWORD
-  - make -C .ci notify-hub-docker-com URL=$DOCKER_HUB_NOTIFY_URL
+    - |+
+      cat > /kaniko/.docker/config.json <<EOF
+      {
+        "auths": {
+          "$CI_REGISTRY": {
+            "username": "$GITLAB_CI_REGISTRY_USER",
+            "password": "$GITLAB_CI_REGISTRY_PASSWORD"
+          },
+          "$CUSTOM_REGISTRY_URL": {
+            "username": "$CUSTOM_REGISTRY_USER",
+            "password": "$CUSTOM_REGISTRY_PW"
+          },
+          "https://index.docker.io/v1": {
+            "username": "$DOCKER_USERNAME",
+            "password": "$DOCKER_PASSWORD"
+          }
+        }
+      }
+      EOF
+    - echo "${CA}" >> /kaniko/ssl/certs/ca-certificates.crt
+    - /kaniko/executor --verbosity info
+                      --reproducible
+                      --digest-file /dev/termination-log 
+                      --context "$CI_PROJECT_DIR/$FOLDER"
+                      --dockerfile "$CI_PROJECT_DIR/$FOLDER/Dockerfile"
+                      --destination ""$CUSTOM_REGISTRY_URL/$CI_PROJECT_PATH_SLUG:$TAG"
+                      --destination ""$DOCKER_SLUG/$CI_PROJECT_PATH_SLUG:$TAG"
+                      --cache=true
+                      --cache-repo="$CI_REGISTRY_IMAGE/cache"
+                      #--build-arg "$BUILD_ARGS"
+    - make -C .ci notify-hub-docker-com URL=$DOCKER_HUB_NOTIFY_URL
 
 
-pull-10.4.4-bionic:
-    extends: .pull
-    variables: 
-      VERSION: "library/mariadb:10.4.4-bionic"
+build-10.4.4-bionic:
+  extends: .build
+  variables:
+    FOLDER: 10.4.4-bionic
+    #TAG: $CI_COMMIT_SHA-$CI_PIPELINE_ID
+    TAG: $FOLDER
+    BUILD_ARGS: ""
