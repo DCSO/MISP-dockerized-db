@@ -32,7 +32,11 @@ variables:
                       --destination "$DOCKER_SLUG/$CI_PROJECT_NAME:$TAG"
                       --cache=true
                       --cache-repo="$CI_REGISTRY_IMAGE/cache"
-                      --build-arg "$BUILD_ARGS"
+                      --build-arg VCS_REF="$CI_COMMIT_SHA" 
+                      --build-arg VERSION="$FOLDER" 
+                      --build-arg GIT_REPO="https://github.com/DCSO/$CI_PROJECT_NAME" 
+                      --build-arg COMPONENT="db" 
+                      --build-arg BUILD_DATE="$(date -u +"%Y-%m-%d")"
     - make -C .ci notify-hub-docker-com URL=$DOCKER_HUB_NOTIFY_URL
 
 
@@ -42,7 +46,6 @@ build-10.4.4-bionic:
     FOLDER: 10.4.4-bionic
     #TAG: $CI_COMMIT_SHA-$CI_PIPELINE_ID
     TAG: $FOLDER
-    BUILD_ARGS: BUILD_DATE="$(date -u +"%Y-%m-%d")" VCS_REF="$CI_COMMIT_SHA" VERSION="$FOLDER" GIT_REPO="https://github.com/DCSO/$CI_PROJECT_NAME" COMPONENT="db"
 
 
 
