@@ -82,6 +82,9 @@ variables:
       }
       EOF
     - echo "${CA}" >> /kaniko/ssl/certs/ca-certificates.crt
+    - echo "$CI_PROJECT_DIR/$FOLDER/Dockerfile"
+    - echo "$CUSTOM_REGISTRY_URL/$CI_PROJECT_PATH_SLUG:$TAG"
+    - echo "$DOCKER_SLUG/$CI_PROJECT_PATH_SLUG:$TAG"
     - /kaniko/executor --verbosity info
                       --reproducible
                       --digest-file /dev/termination-log 
