@@ -42,11 +42,7 @@ build-10.4.4-bionic:
     FOLDER: 10.4.4-bionic
     #TAG: $CI_COMMIT_SHA-$CI_PIPELINE_ID
     TAG: $FOLDER
-    BUILD_ARGS: BUILD_DATE="$(date -u +"%Y-%m-%d")"
-                VCS_REF=$CI_COMMIT_SHA
-                VERSION="$FOLDER"
-                GIT_REPO=https://github.com/DCSO/
-                COMPONENT="db"
+    BUILD_ARGS: BUILD_DATE="$(date -u +"%Y-%m-%d")" VCS_REF="$CI_COMMIT_SHA" VERSION="$FOLDER" GIT_REPO="https://github.com/DCSO/$CI_PROJECT_NAME" COMPONENT="db"
 
 
 
