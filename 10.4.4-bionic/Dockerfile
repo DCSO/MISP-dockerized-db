@@ -1,0 +1,2 @@
+ARG DB_VERSION=10.4.4-bionic
+FROM mariadb:${DB_VERSION}}
