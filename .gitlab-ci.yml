@@ -2,6 +2,7 @@ stages:
 - lint
 #- test
 - build
+- notify
 
 variables:
   # The following variables are setup via gitlab project group:
@@ -36,8 +37,8 @@ shellcheck:
                       --digest-file /dev/termination-log 
                       --context "$CI_PROJECT_DIR/$FOLDER"
                       --dockerfile "$CI_PROJECT_DIR/$FOLDER/Dockerfile"
-                      --destination "$CUSTOM_REGISTRY_URL/$CI_PROJECT_NAME:$TAG"
-                      --destination "$DOCKER_SLUG/$CI_PROJECT_NAME:$TAG"
+                      --destination "$CUSTOM_REGISTRY_URL/$CI_PROJECT_NAME:$TAG-dev"
+                      --destination "$DOCKER_SLUG/$CI_PROJECT_NAME:$TAG-dev"
                       --cache=true
                       --cache-repo="$CI_REGISTRY_IMAGE/cache"
                       --build-arg VCS_REF="$CI_COMMIT_SHA" 
@@ -47,6 +48,12 @@ shellcheck:
                       --build-arg BUILD_DATE="$(date -u +"%Y-%m-%d")"
     - .ci/05_notify_hub.docker.com.sh $DOCKER_HUB_NOTIFY_URL
 
+notify:
+  stage: notify
+  image:
+    name: appropriate/curl
+  script:
+    - -X POST -H 'Content-Type: application/json'  --data '{"docker_tag_name": "hub_automatic_untested"}'  "$NOTIFY_URL"
 
 build-10.4.4-bionic:
   extends: .build
