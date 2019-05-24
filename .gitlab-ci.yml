@@ -2,6 +2,7 @@ stages:
 - lint
 #- test
 - build
+#- tag
 - notify
 
 variables:
@@ -30,7 +31,7 @@ shellcheck:
   - feat/MDD-169
   image:
     # :debug for gitlab-ci sh in image
-    name: gitlab.dcso.lolcat:4567/misp/misp-docker-build-container:kaniko_debug
+    name: gitlab.dcso.lolcat:4567/misp/helper-containers:kaniko
   script:
     - /kaniko/executor --verbosity info
                       --reproducible
@@ -46,13 +47,13 @@ shellcheck:
                       --build-arg GIT_REPO="https://github.com/DCSO/$CI_PROJECT_NAME" 
                       --build-arg COMPONENT="db" 
                       --build-arg BUILD_DATE="$(date -u +"%Y-%m-%d")"
-    - .ci/05_notify_hub.docker.com.sh $DOCKER_HUB_NOTIFY_URL
 
 notify:
   stage: notify
   image:
-    name: appropriate/curl
-  script: -X POST -H "Content-Type':' application/json"  --data '{"docker_tag_name"':' "hub_automatic_untested"}'  "$NOTIFY_URL"
+    name: gitlab.dcso.lolcat:4567/misp/helper-containers:curl
+  script: 
+  - -X POST -H "Content-Type':' application/json"  --data '{"docker_tag_name"':' "hub_automatic_untested"}'  "$NOTIFY_URL"
 
 build-10.4.4-bionic:
   extends: .build
