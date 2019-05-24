@@ -1,4 +1,5 @@
 stages:
+- lint
 #- test
 - build
 
@@ -12,7 +13,14 @@ variables:
   # CUSTOM_REGISTRY_USER
   # CUSTOM_REGISTRY_PW
   # CUSTOM_REGISTRIES
-  
+
+shellcheck:
+  stage: lint
+  image: koalaman/shellcheck-alpine
+  script:
+    - find . -path *.sh -type f -print -exec shellcheck {} +
+  allow_failure: true     # If you would check via shellcheck, but not to fail it there is any found.
+
 .build:
   stage: build
   only:
