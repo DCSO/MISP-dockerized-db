@@ -45,7 +45,9 @@ shellcheck:
                       --build-arg GIT_REPO="https://github.com/DCSO/$CI_PROJECT_NAME" 
                       --build-arg COMPONENT="db" 
                       --build-arg BUILD_DATE="$(date -u +"%Y-%m-%d")"
-    - make -C .ci notify-hub-docker-com URL=$DOCKER_HUB_NOTIFY_URL
+    - |+
+      cd .ci; 
+      05_notify_hub.docker.com.sh $DOCKER_HUB_NOTIFY_URL
 
 
 build-10.4.4-bionic:
