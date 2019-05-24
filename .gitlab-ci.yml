@@ -57,7 +57,7 @@ notify:
     name: alpine
   script: 
   - apk add --no-cache curl
-  - curl -X POST -H "Content-Type':' application/json"  --data '{"docker_tag_name"':' "hub_automatic_untested"}'  "$NOTIFY_URL"
+  - curl -X POST -H "Content-Type':' application/json"  --data '{"docker_tag_name"':' "hub_automatic_untested"}'  "$DOCKER_HUB_NOTIFY_URL"
 
 build-10.4.4-bionic:
   extends: .build
