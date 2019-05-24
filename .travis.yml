@@ -7,6 +7,7 @@ addons:
 
 env:
   global:
+  #- DOCKER_COMPOSE_VERSION=1.4.2
   # The following variables are setup via gitlab project group:
   # - DOCKER_HUB_TOKEN
   # - DOCKER_SLUG
@@ -16,21 +17,21 @@ env:
   # - CUSTOM_REGISTRY_USER
   # - CUSTOM_REGISTRY_PWs
   matrix:
-  - VERSION=1.0-debian
-  - VERSION=1.1-debian
-  - VERSION=1.2-debian
-  - VERSION=1.3-debian
-  #- VERSION=2.0-alpine
-  # legacy
-  - VERSION=1.0.0-debian
-  - VERSION=1.0.1-debian
-
-before_install:
-- sudo .ci/01_before_install.sh
+  - VERSION=10.4.4-bionic
 
 script:
-- make -C .ci  build v=${VERSION}
-- make -C .ci  tags REPOURL=$DOCKER_SLUG # tagged dcso/CONTAINERNAME + custom-URL/CONTAINERNAME
+- docker run --rm gcr.io/kaniko-project/executor:debug /kaniko/executor 
+                      --verbosity info
+                      --reproducible
+                      --digest-file /dev/termination-log 
+                      --context "$TRAVIS_BUILD_DIR/$FOLDER"
+                      --dockerfile "$TRAVIS_BUILD_DIR/$FOLDER/Dockerfile"
+                      --no-push
+                      --build-arg VCS_REF="$TRAVIS_COMMIT" 
+                      --build-arg VERSION="$FOLDER" 
+                      --build-arg GIT_REPO="https://github.com/$TRAVIS_REPO_SLUG" 
+                      --build-arg COMPONENT="db"
+                      --build-arg BUILD_DATE="$(date -u +"%Y-%m-%d")"
 
 # don't notify me when things fail
 notifications:
