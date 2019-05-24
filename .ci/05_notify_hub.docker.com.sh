@@ -1,5 +1,5 @@
-#!/bin/bash
-set -exv
+#!/busybox/sh
+set -e
 
 STARTMSG="[notify_hob.docker.com]"
 
