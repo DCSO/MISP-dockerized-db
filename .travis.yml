@@ -17,7 +17,7 @@ env:
   # - CUSTOM_REGISTRY_USER
   # - CUSTOM_REGISTRY_PWs
   matrix:
-  - VERSION=10.4.4-bionic
+  - FOLDER=10.4.4-bionic
 
 script:
 - docker run --rm gcr.io/kaniko-project/executor:debug /kaniko/executor 
