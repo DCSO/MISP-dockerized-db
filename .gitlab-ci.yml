@@ -30,7 +30,7 @@ build-10.4.4-bionic:
     FOLDER: 10.4.4-bionic
     VERSION: "$FOLDER"
     COMPONENT: db
-    TAGS: "$FOLDER latest-dev"
+    TAGS: "${FOLDER}-dev latest-dev"
     DEBUG: "true"
 
 notify:
