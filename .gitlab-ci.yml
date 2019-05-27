@@ -17,4 +17,4 @@ include:
 #
 # For a cleaner Gitlab CI file include all subfolder which should be build:
 #
-  - '10.4.4-bionic/gitlab-ci.yml'
+  - '10.4.4-bionic/.gitlab-ci.yml'
