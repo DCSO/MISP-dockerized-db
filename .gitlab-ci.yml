@@ -1,0 +1,20 @@
+
+stages:
+- lint
+- build
+- notify
+
+notify:
+  extends: .notify
+
+variables:
+  COMPONENT: db
+
+include:
+  - project: 'MISP/helper-containers'
+    ref: master
+    file: '/.gitlab-ci-template.yml'
+#
+# For a cleaner Gitlab CI file include all subfolder which should be build:
+#
+  - '10.4.5-bionic/.gitlab-ci.yml'
