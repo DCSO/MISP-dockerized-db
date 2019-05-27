@@ -8,16 +8,10 @@ addons:
 env:
   global:
   #- DOCKER_COMPOSE_VERSION=1.4.2
-  # The following variables are setup via gitlab project group:
-  # - DOCKER_HUB_TOKEN
-  # - DOCKER_SLUG
-  # - DOCKER_USERNAME
-  # - DOCKER_PASSWORD
-  # - CUSTOM_REGISTRY_URL
-  # - CUSTOM_REGISTRY_USER
-  # - CUSTOM_REGISTRY_PWs
+  - COMPONENT="db"
+
   matrix:
-  - FOLDER=10.4.4-bionic
+  - FOLDER=10.4.5-bionic
 
 script:
 - docker run --rm gcr.io/kaniko-project/executor:debug /kaniko/executor 
@@ -30,7 +24,7 @@ script:
                       --build-arg VCS_REF="$TRAVIS_COMMIT" 
                       --build-arg VERSION="$FOLDER" 
                       --build-arg GIT_REPO="https://github.com/$TRAVIS_REPO_SLUG" 
-                      --build-arg COMPONENT="db"
+                      --build-arg COMPONENT="$COMPONENT"
                       --build-arg BUILD_DATE="$(date -u +"%Y-%m-%d")"
 
 # don't notify me when things fail
