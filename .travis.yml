@@ -17,6 +17,7 @@ script:
 - echo $TRAVIS_BUILD_DIR
 - ls -la $TRAVIS_BUILD_DIR 
 - ls -la
+- set -xv
 - docker run --rm gcr.io/kaniko-project/executor:debug /kaniko/executor 
                       --verbosity info
                       --reproducible
