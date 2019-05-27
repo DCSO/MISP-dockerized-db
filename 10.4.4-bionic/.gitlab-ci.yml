@@ -1,0 +1,7 @@
+build-10.4.4-bionic:
+  extends: .build
+  variables:
+    FOLDER: 10.4.4-bionic
+    VERSION: "$FOLDER"
+    TAGS: "${FOLDER}-dev latest-dev"
+    #DEBUG: "false"
