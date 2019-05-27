@@ -15,13 +15,14 @@ env:
 
 script:
 - echo $TRAVIS_BUILD_DIR
-- ls -la $TRAVIS_BUILD_DIR  
+- ls -la $TRAVIS_BUILD_DIR 
+- ls -la
 - docker run --rm gcr.io/kaniko-project/executor:debug /kaniko/executor 
                       --verbosity info
                       --reproducible
                       --digest-file /dev/termination-log 
-                      --context "$FOLDER"
-                      --dockerfile "$FOLDER/Dockerfile"
+                      --context "$TRAVIS_BUILD_DIR/$FOLDER"
+                      --dockerfile "$TRAVIS_BUILD_DIR/$FOLDER/Dockerfile"
                       --no-push
                       --build-arg VCS_REF="$TRAVIS_COMMIT" 
                       --build-arg VERSION="$FOLDER" 
