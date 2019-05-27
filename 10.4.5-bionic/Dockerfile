@@ -1,5 +1,5 @@
-ARG DB_VERSION=10.4.4-bionic
-FROM mariadb:${DB_VERSION}
+ARG VERSION=10.4.4-bionic
+FROM mariadb:${VERSION}
 
 #     Variables for Labels:
 ARG VENDOR="DCSO GmbH"

@@ -14,16 +14,13 @@ env:
   - FOLDER=10.4.5-bionic
 
 script:
-- echo $TRAVIS_BUILD_DIR
-- ls -la $TRAVIS_BUILD_DIR 
-- ls -la
 - set -xv
 - docker run --rm gcr.io/kaniko-project/executor:debug /kaniko/executor 
                       --verbosity info
                       --reproducible
                       --digest-file /dev/termination-log 
                       --context "$TRAVIS_BUILD_DIR/$FOLDER"
-                      --dockerfile "$TRAVIS_BUILD_DIR/$FOLDER/Dockerfile"
+                      --dockerfile "Dockerfile"
                       --no-push
                       --build-arg VCS_REF="$TRAVIS_COMMIT" 
                       --build-arg VERSION="$FOLDER" 
