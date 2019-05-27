@@ -14,7 +14,6 @@ env:
   - FOLDER=10.4.5-bionic
 
 script:
-- set -xv
 - docker build -f "$TRAVIS_BUILD_DIR/$FOLDER/Dockerfile" 
                       --build-arg VCS_REF="$TRAVIS_COMMIT" 
                       --build-arg VERSION="$FOLDER" 
