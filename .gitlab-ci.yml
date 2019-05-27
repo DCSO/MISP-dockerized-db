@@ -8,14 +8,16 @@ stages:
 - build
 - notify
 
+notify:
+  extends: .notify
+
+variables:
+  COMPONENT: db
+
 build-10.4.4-bionic:
   extends: .build
   variables:
     FOLDER: 10.4.4-bionic
     VERSION: "$FOLDER"
-    COMPONENT: db
     TAGS: "${FOLDER}-dev latest-dev"
     #DEBUG: "false"
-
-notify:
-  extends: .notify
