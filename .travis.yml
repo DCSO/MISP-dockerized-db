@@ -8,7 +8,7 @@ addons:
 env:
   global:
   #- DOCKER_COMPOSE_VERSION=1.4.2
-  - COMPONENT="db"
+  - COMPONENT=db
 
   matrix:
   - FOLDER=10.4.5-bionic
@@ -20,7 +20,7 @@ script:
                       --reproducible
                       --digest-file /dev/termination-log 
                       --context "$TRAVIS_BUILD_DIR/$FOLDER"
-                      --dockerfile "Dockerfile"
+                      --dockerfile "$TRAVIS_BUILD_DIR/$FOLDER/Dockerfile"
                       --no-push
                       --build-arg VCS_REF="$TRAVIS_COMMIT" 
                       --build-arg VERSION="$FOLDER" 
