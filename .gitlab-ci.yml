@@ -28,9 +28,9 @@ build-10.4.4-bionic:
   extends: .build
   variables:
     FOLDER: 10.4.4-bionic
-    TAG: $FOLDER
+    VERSION: $FOLDER
     COMPONENT: db
-    TAGS: "$TAG latest-dev"
+    TAGS: $FOLDER latest-dev
 
 notify:
   extends: .notify
