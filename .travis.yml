@@ -18,8 +18,8 @@ script:
                       --verbosity info
                       --reproducible
                       --digest-file /dev/termination-log 
-                      --context "$TRAVIS_BUILD_DIR/$FOLDER"
-                      --dockerfile "$TRAVIS_BUILD_DIR/$FOLDER/Dockerfile"
+                      --context "$FOLDER"
+                      --dockerfile "$FOLDER/Dockerfile"
                       --no-push
                       --build-arg VCS_REF="$TRAVIS_COMMIT" 
                       --build-arg VERSION="$FOLDER" 
