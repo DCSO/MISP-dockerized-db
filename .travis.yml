@@ -14,6 +14,8 @@ env:
   - FOLDER=10.4.5-bionic
 
 script:
+- echo $TRAVIS_BUILD_DIR
+- ls -la $TRAVIS_BUILD_DIR  
 - docker run --rm gcr.io/kaniko-project/executor:debug /kaniko/executor 
                       --verbosity info
                       --reproducible
