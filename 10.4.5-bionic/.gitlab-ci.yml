@@ -5,3 +5,13 @@ build-10.4.5-bionic:
     VERSION: "$FOLDER"
     TAGS: "${FOLDER}-dev latest-dev"
     #DEBUG: "false"
+    RELEASE_DATE: 2019-06
+  
+test-10.4.5-bionic:
+  extends: .test
+  variables:
+    FOLDER: 10.4.5-bionic
+    VERSION: "$FOLDER"
+  only:
+    changes:
+    - 10.4.5-bionic/*
